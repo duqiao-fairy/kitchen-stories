@@ -138,7 +138,7 @@
 <script>
 
   // import './index.less'
-  
+  import srcConfig from 'src/config'
   export default {
     name: 'PHome',
     data () {
@@ -146,7 +146,8 @@
         menuList: [],
         weekMenuList: [],
         noMeetMenu: {},
-        weekDays: ['周日晚餐', '周一晚餐', '周二晚餐', '周三晚餐', '周四晚餐', '周五晚餐', '周六晚餐']
+        weekDays: ['周日晚餐', '周一晚餐', '周二晚餐', '周三晚餐', '周四晚餐', '周五晚餐', '周六晚餐'],
+        API_ROOT: srcConfig.API_ROOT
       }
     },
     created () {
@@ -164,14 +165,14 @@
       // }, (response) => {    
       //     // 响应错误回调
       // });
-      this.$http.get('/api/cook/list?rows=7').then((response) => {    
+      this.$http.jsonp(`${this.API_ROOT}api/cook/list?rows=7`).then((response) => {    
           // 响应成功回调
           // console.log(response)
           this.menuList = response.body.tngou
       }, (response) => {    
           // 响应错误回调
       });
-      this.$http.get('/api/cook/list?id=9&rows=7').then((response) => {    
+      this.$http.jsonp(`${this.API_ROOT}api/cook/list?id=9&rows=7`).then((response) => {    
           // 响应成功回调
           // console.log(response)
           this.weekMenuList = response.body.tngou
