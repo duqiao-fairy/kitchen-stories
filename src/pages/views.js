@@ -19,8 +19,8 @@ module.exports = {
   //   keywords: config.keywords,
   //   description: config.description
   // },
-  vueindex: {
-    title: '厨房故事-vue2',
+  index: {
+    title: '厨房故事-vue2.0',
     isVue: true,
     isVueRouter: true,
     keywords: config.keywords,

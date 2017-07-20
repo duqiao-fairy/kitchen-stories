@@ -1,37 +1,27 @@
-import entryMini from 'entry-mini'
+import entry from 'entry'
 
-import header from 'comModules/header'
-import footer from 'comModules/footer'
+import mHeader from 'comModules/_header'
+import mFooter from 'comModules/footer'
+import router from './router'
 
-import data from './data'
+const App = {
 
-import './index.less'
+  components: {
+    mHeader: mHeader,
+    mFooter
+  },
 
-/**
- * 跟节点element
- */
-let el
-let container
-
-const templates = {
-  // header: `<div class=header"">header</div>`,
-  // content: (data) => {
-  //   return `<div class="content">${data.text}</div>`
-  // },
-  // footer: `<div>footer</div>`
-}
-
-function render (el) {
-  // el.innerHTML = templates.header + templates.content({ text: 'content' }) + templates.footer
-  // el.innerHTML = header 
-}
-
-entryMini({
-  template: header.template + require('./index.html') + footer.template,
-
-  init (info) {
-    el = this.el
-    // container = document.getElementById('container')
-    // render(container)
+  render () {
+    return <div>
+      <m-header></m-header>
+      <router-view></router-view>
+      <m-footer></m-footer>
+    </div>
   }
-})
+}
+
+const Options = {
+  router
+}
+
+entry(App, Options)
