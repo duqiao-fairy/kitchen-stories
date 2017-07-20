@@ -1,0 +1,110 @@
+/* Cell Component */
+
+/* Header Component */
+
+/* Button Component */
+
+/* Tab Item Component */
+
+/* Tabbar Component */
+
+/* Navbar Component */
+
+/* Checklist Component */
+
+/* Radio Component */
+
+/* z-index */
+
+.mint-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.053rem;
+  border: 0;
+  box-sizing: border-box;
+  color: inherit;
+  display: block;
+  font-size: 0.24rem;
+  height: 0.547rem;
+  outline: 0;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.mint-button::after {
+  background-color: #000;
+  content: " ";
+  opacity: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.mint-button:not(.is-disabled):active::after {
+  opacity: .4;
+}
+
+.mint-button.is-disabled {
+  opacity: .6;
+}
+
+.mint-button-icon {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.mint-button--default {
+  color: #656b79;
+  background-color: #f6f8fa;
+  box-shadow: 0 0 0.013rem #b8bbbf;
+}
+
+.mint-button--default.is-plain {
+  border: 0.013rem solid #5a5a5a;
+  background-color: transparent;
+  box-shadow: none;
+  color: #5a5a5a;
+}
+
+.mint-button--primary {
+  color: #fff;
+  background-color: #00d8c9;
+}
+
+.mint-button--primary.is-plain {
+  border: 0.013rem solid #00d8c9;
+  background-color: transparent;
+  color: #00d8c9;
+}
+
+.mint-button--danger {
+  color: #fff;
+  background-color: #ef4f4f;
+}
+
+.mint-button--danger.is-plain {
+  border: 0.013rem solid #ef4f4f;
+  background-color: transparent;
+  color: #ef4f4f;
+}
+
+.mint-button--large {
+  display: block;
+  width: 100%;
+}
+
+.mint-button--normal {
+  display: inline-block;
+  padding: 0 0.16rem;
+}
+
+.mint-button--small {
+  display: inline-block;
+  font-size: 0.187rem;
+  padding: 0 0.16rem;
+  height: 0.44rem;
+}

@@ -1,0 +1,97 @@
+/* Cell Component */
+
+/* Header Component */
+
+/* Button Component */
+
+/* Tab Item Component */
+
+/* Tabbar Component */
+
+/* Navbar Component */
+
+/* Checklist Component */
+
+/* Radio Component */
+
+/* z-index */
+
+.mint-checklist .mint-cell {
+  padding: 0;
+}
+
+.mint-checklist.is-limit .mint-checkbox-core:not(:checked) {
+  background-color: #d9d9d9;
+  border-color: #d9d9d9;
+}
+
+.mint-checklist-label {
+  display: block;
+  padding: 0 0.133rem;
+}
+
+.mint-checklist-title {
+  color: #888;
+  display: block;
+  font-size: 0.16rem;
+  margin: 0.107rem;
+}
+
+.mint-checkbox.is-right {
+  float: right;
+}
+
+.mint-checkbox-label {
+  vertical-align: middle;
+  margin-left: 0.08rem;
+}
+
+.mint-checkbox-input {
+  display: none;
+}
+
+.mint-checkbox-input:checked + .mint-checkbox-core {
+  background-color: #00d8c9;
+  border-color: #00d8c9;
+}
+
+.mint-checkbox-input:checked + .mint-checkbox-core::after {
+  border-color: #fff;
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+}
+
+.mint-checkbox-input[disabled] + .mint-checkbox-core {
+  background-color: #d9d9d9;
+  border-color: #ccc;
+}
+
+.mint-checkbox-core {
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 100%;
+  border: 0.013rem solid #ccc;
+  position: relative;
+  width: 0.267rem;
+  height: 0.267rem;
+  vertical-align: middle;
+}
+
+.mint-checkbox-core::after {
+  border: 0.027rem solid transparent;
+  border-left: 0;
+  border-top: 0;
+  content: " ";
+  top: 0.04rem;
+  left: 0.08rem;
+  position: absolute;
+  width: 0.053rem;
+  height: 0.107rem;
+  -webkit-transform: rotate(45deg) scale(0);
+  -ms-transform: rotate(45deg) scale(0);
+  transform: rotate(45deg) scale(0);
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
+}

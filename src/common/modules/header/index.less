@@ -1,0 +1,39 @@
+.header {
+  @super-height: 100px;
+
+  width: 100%;
+  height: @super-height;
+  position: fixed;
+  text-align: center;
+  border-bottom: 1px solid #d8d8d8; /*no*/
+  z-index: 10;
+  background-color: #fff;
+
+  .menu-button {
+    width: 32px;
+    height: 24px;
+    position: absolute;
+    top: (@super-height - 24) / 2;
+    left: 20px;
+  }
+
+  .logo {
+    @img-height: 40px;
+
+    display: inline-block;
+    padding-top: (@super-height - @img-height) / 2;
+
+    img {
+      width: 400px;
+      height: @img-height;
+    }
+  }
+
+  .search-buttom {
+    width: 18 * 2px;
+    height: 18 * 2px;
+    position: absolute;
+    top: (@super-height - 36px) / 2;
+    right: 30px;
+  }
+}

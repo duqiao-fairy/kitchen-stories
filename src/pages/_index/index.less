@@ -1,0 +1,183 @@
+.container {
+  @theme-font-color-deep: #222;
+  @theme-font-color-deep-minus: #464646;
+  @theme-font-color-shallow: #979797;
+  @theme-font-family: Brandon,Helvetica,sans-serif,"Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+  @theme-font-weight: 600;
+
+  padding-top: 95 * 2px;
+  padding-left: 10 * 2px;
+  padding-right: 10 * 2px;
+
+  .img-one {
+    padding-bottom: 95px;
+
+    .title {
+      font-size: 40px;
+      color: @theme-font-color-deep-minus;
+      font-weight:@theme-font-weight;
+      font-family: @theme-font-family;
+    }
+
+    .img-wraper {
+      padding-top: 20 * 2px;
+
+      img {
+        width: 356 * 2px;
+        height: 200 * 2px;
+        border-radius: 25px;
+      }
+    }
+
+    .description {
+      padding-top: 16px;
+      line-height: 48px;
+
+      .title {
+        font-size: 32px;
+        color: @theme-font-color-deep;
+        font-weight:@theme-font-weight;
+        font-family: @theme-font-family;
+      }
+
+      .sub-title {
+        font-size: 32px;
+        color: @theme-font-color-shallow;
+        font-weight:@theme-font-weight;
+        font-family: @theme-font-family;
+      }
+    }
+  }
+
+  .img-list {
+    // padding-bottom: 95px;
+    /* 
+      add by duqiao 
+      margin 负值 来补充 父级的右侧padding-right的空隙
+    */
+    margin-right: -20px;
+    overflow: hidden;
+
+    .title {
+      font-size: 40px;
+      color: @theme-font-color-deep-minus;
+      font-weight:@theme-font-weight;
+      font-family: @theme-font-family;
+    }
+
+    .search-all {
+      padding-right: 20px;
+      font-size: 32px;
+      color: @theme-font-color-shallow;
+      font-weight:@theme-font-weight;
+      font-family: @theme-font-family;
+      float: right;
+      display: block;
+      margin-top: -32px;
+    }
+
+    .img-wraper-content {
+      overflow-x: scroll;
+      padding-top: 20 * 2px;
+    }
+
+    .imgs-wraper {
+      width: 10000%;
+      border-radius: 5px;
+
+      .img-s {
+        width: 165 * 2px;
+        // padding-left: 16px;
+        // padding-right: 16px;
+        float: left;
+        position: relative;
+        box-sizing: border-box;
+
+        img {
+          width: 149 * 2px;
+          height: 198 * 2px;
+          border-radius: 20px;
+        }
+
+        .total-time {
+          font-size: 12.8 * 2px;
+          color: #fff;
+          position: absolute;
+          bottom: 60px;
+          right: 60px;
+        }
+
+        .title-wraper {
+          width: 149 * 2px; 
+          height: 96 * 2px;
+          padding-top: 16px;
+        }
+
+        .title {
+          font-size: 32px;
+          color: @theme-font-color-deep-minus;
+          font-weight:@theme-font-weight;
+          font-family: @theme-font-family;
+          width: 149 * 2px;
+          height: 21 * 2px;
+        }
+      }
+
+
+    }
+  }
+
+  .week-dinner {
+    .img-wraper-content {
+      overflow-x: scroll;
+      padding-top: 20 * 2px;
+    }
+
+    .imgs-wraper {
+      width: 10000%;
+      border-radius: 5px;
+
+      .img-s {
+        width: 255 * 2px;
+        // padding-left: 16px;
+        // padding-right: 16px;
+        float: left;
+        position: relative;
+        box-sizing: border-box;
+
+        img {
+          width: 239 * 2px;
+          height: 179 * 2px;
+          border-radius: 20px;
+        }
+
+        .total-time {
+          font-size: 12.8 * 2px;
+          color: #fff;
+          position: absolute;
+          bottom: 60px;
+          right: 60px;
+        }
+
+        .title-wraper {
+          width: 149 * 2px; 
+          height: 96 * 2px;
+          padding-top: 16px;
+        }
+
+        .title {
+          font-size: 32px;
+          color: @theme-font-color-deep-minus;
+          font-weight:@theme-font-weight;
+          font-family: @theme-font-family;
+          width: 149 * 2px;
+          height: 21 * 2px;
+        }
+      }
+
+
+    }
+
+  }
+
+}

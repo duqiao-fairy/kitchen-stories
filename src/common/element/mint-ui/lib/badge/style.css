@@ -1,0 +1,57 @@
+/* Cell Component */
+
+/* Header Component */
+
+/* Button Component */
+
+/* Tab Item Component */
+
+/* Tabbar Component */
+
+/* Navbar Component */
+
+/* Checklist Component */
+
+/* Radio Component */
+
+/* z-index */
+
+.mint-badge {
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+}
+
+.mint-badge.is-size-large {
+  border-radius: 0.187rem;
+  font-size: 0.24rem;
+  padding: 0.027rem 0.133rem;
+}
+
+.mint-badge.is-size-small {
+  border-radius: 0.107rem;
+  font-size: 0.16rem;
+  padding: 0.027rem 0.08rem;
+}
+
+.mint-badge.is-size-normal {
+  border-radius: 0.16rem;
+  font-size: 0.2rem;
+  padding: 0.027rem 0.107rem;
+}
+
+.mint-badge.is-warning {
+  background-color: #ffc107;
+}
+
+.mint-badge.is-error {
+  background-color: #f44336;
+}
+
+.mint-badge.is-primary {
+  background-color: #00d8c9;
+}
+
+.mint-badge.is-success {
+  background-color: #4caf50;
+}

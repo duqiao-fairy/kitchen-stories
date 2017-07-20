@@ -1,0 +1,48 @@
+/* Cell Component */
+
+/* Header Component */
+
+/* Button Component */
+
+/* Tab Item Component */
+
+/* Tabbar Component */
+
+/* Navbar Component */
+
+/* Checklist Component */
+
+/* Radio Component */
+
+/* z-index */
+
+.mint-datetime {
+  width: 100%;
+}
+
+.mint-datetime .picker-slot-wrapper,
+.mint-datetime .picker-item {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.mint-datetime .picker-toolbar {
+  border-bottom: solid 0.013rem #eaeaea;
+}
+
+.mint-datetime-action {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  line-height: 0.533rem;
+  font-size: 0.213rem;
+  color: #00d8c9;
+}
+
+.mint-datetime-cancel {
+  float: left;
+}
+
+.mint-datetime-confirm {
+  float: right;
+}

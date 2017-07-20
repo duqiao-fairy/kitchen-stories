@@ -1,0 +1,49 @@
+/* Cell Component */
+
+/* Header Component */
+
+/* Button Component */
+
+/* Tab Item Component */
+
+/* Tabbar Component */
+
+/* Navbar Component */
+
+/* Checklist Component */
+
+/* Radio Component */
+
+/* z-index */
+
+.mint-navbar {
+  background-color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+
+.mint-navbar .mint-tab-item {
+  padding: 0.227rem 0;
+  font-size: 0.2rem;
+}
+
+.mint-navbar .mint-tab-item:last-child {
+  border-right: 0;
+}
+
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 0.04rem solid #00d8c9;
+  color: #00d8c9;
+  margin-bottom: -0.04rem;
+}
+
+.mint-navbar.is-fixed {
+  top: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1;
+}

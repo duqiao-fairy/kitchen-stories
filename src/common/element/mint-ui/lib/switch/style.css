@@ -1,0 +1,99 @@
+/* Cell Component */
+
+/* Header Component */
+
+/* Button Component */
+
+/* Tab Item Component */
+
+/* Tabbar Component */
+
+/* Navbar Component */
+
+/* Checklist Component */
+
+/* Radio Component */
+
+/* z-index */
+
+.mint-switch {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+}
+
+.mint-switch * {
+  pointer-events: none;
+}
+
+.mint-switch-label {
+  margin-left: 0.133rem;
+  display: inline-block;
+}
+
+.mint-switch-label:empty {
+  margin-left: 0;
+}
+
+.mint-switch-core {
+  display: inline-block;
+  position: relative;
+  width: 0.693rem;
+  height: 0.427rem;
+  border: 0.013rem solid #d9d9d9;
+  border-radius: 0.213rem;
+  box-sizing: border-box;
+  background: #d9d9d9;
+}
+
+.mint-switch-core::after,
+.mint-switch-core::before {
+  content: " ";
+  top: 0;
+  left: 0;
+  position: absolute;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  border-radius: 0.2rem;
+}
+
+.mint-switch-core::after {
+  width: 0.4rem;
+  height: 0.4rem;
+  background-color: #fff;
+  box-shadow: 0 0.013rem 0.04rem rgba(0, 0, 0, .4);
+}
+
+.mint-switch-core::before {
+  width: 0.667rem;
+  height: 0.4rem;
+  background-color: #fdfdfd;
+}
+
+.mint-switch-input {
+  display: none;
+}
+
+.mint-switch-input:checked + .mint-switch-core {
+  border-color: #00d8c9;
+  background-color: #00d8c9;
+}
+
+.mint-switch-input:checked + .mint-switch-core::before {
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.mint-switch-input:checked + .mint-switch-core::after {
+  -webkit-transform: translateX(0.267rem);
+  -ms-transform: translateX(0.267rem);
+  transform: translateX(0.267rem);
+}

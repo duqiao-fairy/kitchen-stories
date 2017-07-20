@@ -1,0 +1,120 @@
+@import '~common/less/variable.less';
+@import '~common/less/common.less';
+
+body {
+  background-color: #f2f2f2;
+}
+
+.com-padding {
+  padding-left: 32px;
+  padding-right: 32px;
+  transition: translate .3s ease;
+  transform: translate(0, 0);
+  display: flex;
+  flex-direction: column;
+}
+.com-border-bottom:after {
+  content: '';
+  display: block;
+  height: 1px; /*no*/
+  background-color: #E4E4E4;
+  transform-origin: 0 100%;
+  transform: scaleY(0.5);
+}
+
+.wrapper {
+  font-family: PingFangSC-Regular;
+}
+.block-row-wrapper {
+  background-color: #fff;
+}
+
+.block-row:last-of-type:after {
+  height: 0;
+}
+
+.block-gap-bottom {
+  margin-bottom: 16px;
+}
+
+.block-row-title {
+  font-family: PingFangSC-Medium;
+  font-size: 30px; /*px*/
+  color: #333333;
+  letter-spacing: 0.2px;
+  line-height: 30px; /*px*/
+  padding-top: 48px; /*px*/
+  padding-bottom: 25px; /*px*/
+}
+
+.block-row-text {
+  font-size: 26px; /*px*/
+  color: #666666;
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+  padding-bottom: 40px; /*px*/
+}
+
+.contact-wrapper {
+  padding-top: 48px; /*px*/
+  padding-bottom: 48px; /*px*/
+  padding-left: 60px;
+  padding-right: 60px;
+  background-color: #fff;
+}
+
+.contact-content {
+  font-size: 26px; /*px*/
+  color: #666666;
+  letter-spacing: 0.172px;
+  line-height: 30px; /*px*/
+  text-align: center;
+  margin-bottom: 24px; /*px*/
+}
+
+.contact-btn {
+  background-color: @var-theme-color;
+  display: block;
+  text-align: center;
+  padding-top: 27px; /*px*/
+  padding-bottom: 27px; /*px*/
+  font-family: PingFangSC-Regular;
+  font-size: 34px; /*px*/
+  color: #FFFFFF;
+  letter-spacing: 0;
+  line-height: 34px; /*px*/
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.emails-container {
+  font-size: 26px; /*px*/
+  color: #666666;
+  letter-spacing: 0;
+  line-height: 26px;
+  padding-left: 32px;
+  margin-top: 20px; /*px*/
+  margin-bottom: 120px; /*px*/
+
+  span:first-of-type {
+    margin-right: 40px;
+  }
+}
+
+.footer {
+  font-size: 22px; /*px*/
+  color: #AAAAAA;
+  letter-spacing: 0;
+  line-height: 22px; /*px*/
+  padding-bottom: 24px;
+  text-align: center;
+}
+
+.border-mixin {
+  .com-border-mixin(left, @var-theme-color);
+
+}
+
+.border {
+  border: 1px solid red; /*no*/
+}

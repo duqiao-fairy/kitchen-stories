@@ -1,0 +1,203 @@
+.container {
+  @theme-font-color-deep: #222;
+  @theme-font-color-deep-minus: #464646;
+  @theme-font-color-shallow: #979797;
+  @theme-font-family: Brandon,Helvetica,sans-serif,"Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+  @theme-font-weight: 600;
+  font-size: 40px;
+  font-weight: @theme-font-weight;
+  font-family: @theme-font-family;
+  color: @theme-font-color-deep-minus;
+
+  .detail {
+    padding-top: 95 * 2px;
+    padding-left: 9 * 2px;
+    padding-right: 9 * 2px;
+
+    .recipe-header {
+      padding-bottom: 64px;
+      background: url('~assets/images/detail/dot.png');
+      background-position: bottom;
+      background-size: 12px 6px;
+      background-repeat: repeat-x;
+
+      .recipe-img {
+        img {
+          width: 356 * 2px;
+          height: 267 * 2px;
+          border-radius: 25px;
+        }
+      }
+
+      h1 {
+        margin-top: 32px;
+        margin-bottom: 32px;
+        text-align: center;
+        font-size: 48px;
+        font-weight: @theme-font-weight;
+        font-family: @theme-font-family;
+        color: @theme-font-color-deep-minus;
+      }
+
+      .rating {
+        margin-top: 32px;
+        margin-bottom: 32px;
+        box-sizing: border-box;
+
+        .rating-stars {
+          box-sizing: border-box;
+          text-align: center;
+          padding-top: 16px;
+
+          img {
+            width: 14 * 2px;
+            height: 13 * 2px;
+            padding-left: 6px;
+            padding-right: 6px;
+          }
+        }
+
+        .rating-text {
+          text-align: center;
+          font-size: 24px;
+          font-weight: normal;
+          font-family: @theme-font-family;
+          color: @theme-font-color-deep-minus;
+          padding-top: 8px;
+          line-height: 16.2 * 2px;
+        }
+      }
+
+      .share-links {
+        height: 22 * 2px;
+        margin-left: 72 * 2px;
+        margin-right: 72 * 2px;
+        text-align: center;
+
+        ul {
+          text-align: center;
+        }
+
+        li {
+          float: left;
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+
+      }
+    }
+
+    .recipe-author {
+      background: url('~assets/images/detail/dot.png');
+      background-position: bottom;
+      background-size: 12px 6px;
+      background-repeat: repeat-x;
+      padding-bottom: 42px;
+      padding-top: 42px;
+
+      .author-image {
+        width: 68 * 2px;
+        height: 68 * 2px;
+        margin-right: 32px;
+        margin-bottom: 17px;
+        float: left;
+      }
+
+      .author-title {
+        line-height: 44px;
+      }
+
+      .author-text {
+        font-size: 32px;
+        font-weight: normal;
+        line-height: 42px;
+        clear: both;
+      }
+
+
+    }
+    .recipe-difficulty {
+      background: url('~assets/images/detail/dot.png');
+      background-position: bottom;
+      background-size: 12px 6px;
+      background-repeat: repeat-x;
+      padding-top: 42px;
+      padding-bottom: 42px;
+
+      h2 {
+        line-height: 42px;
+        display: inline;
+        margin-right: 32 * 2px;
+      }
+
+      span {
+        font-size: 32px;
+        font-weight: normal;
+      }
+    }
+
+    .recipe-time {
+      background: url('~assets/images/detail/dot.png');
+      background-position: bottom;
+      background-size: 12px 6px;
+      background-repeat: repeat-x;
+      padding-top: 42px;
+      padding-bottom: 42px;
+    }
+
+    .recipe-ingredients {
+      padding-top: 42px;
+      padding-bottom: 42px;
+      border-bottom: #8e8e8e solid 2px;
+
+      h2 {
+        margin-bottom: 26px;
+      }
+
+      .recipe-ingredients-list {
+        font-size: 32px;
+        font-weight: normal;
+      }
+
+      li {
+        line-height: 42px;
+      }
+      
+      p {
+        display: inline-block;
+        width: 100px;
+      }
+
+      span {
+        margin-left: 130px;
+      }
+    }
+
+    .recipe-steps {
+      padding-top: 32px;
+      padding-bottom: 32px;
+      
+      h2 {
+        margin-bottom: 26px;
+      }
+
+      .step-image {
+        margin-bottom: 32px;
+
+        img {
+          border-radius: 25px;
+        }
+      }
+
+      p {
+        font-size: 32px;
+        font-weight: normal;
+        line-height: 42px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+      }
+    }
+  }
+
+
+}
