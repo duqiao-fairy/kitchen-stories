@@ -82,7 +82,7 @@
         </ul>
       </div>
       <div class="recipe-steps">
-        <h2>烹饪步骤 1/6</h2>
+        <h2>烹饪步骤</h2>
         <div v-html="messageRender">
         <!--    
           <div class="step-image">
@@ -133,7 +133,7 @@
 
 <script>
 
-
+import srcConfig from 'src/config'
 export default {
   
   mixins: [],
@@ -149,7 +149,8 @@ export default {
   data () {
     return {
       menuDetail: {message: ''},
-      menuFood: []
+      menuFood: [],
+      API_ROOT: srcConfig.API_ROOT
     }
   },
 
@@ -176,7 +177,7 @@ export default {
 
   created () {
     let id = this.$route.query.id
-      this.$http.get(`/api/cook/show?id=${id}`).then((response) => {    
+      this.$http.get(`${this.API_ROOT}api/cook/show?id=${id}`).then((response) => {    
           // 响应成功回调
           console.log(response)
           this.menuDetail = response.body

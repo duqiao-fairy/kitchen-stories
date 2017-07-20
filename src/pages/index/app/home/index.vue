@@ -165,6 +165,7 @@
       // }, (response) => {    
       //     // 响应错误回调
       // });
+
       this.$http.jsonp(`${this.API_ROOT}api/cook/list?rows=7`).then((response) => {    
           // 响应成功回调
           // console.log(response)
@@ -172,6 +173,7 @@
       }, (response) => {    
           // 响应错误回调
       });
+
       this.$http.jsonp(`${this.API_ROOT}api/cook/list?id=9&rows=7`).then((response) => {    
           // 响应成功回调
           // console.log(response)
