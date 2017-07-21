@@ -8,7 +8,7 @@
     <div class="detail">
       <div class="recipe-header">
         <div class="recipe-img">
-          <img v-if="menuDetail.img" :src="'http://tnfs.tngou.net/img' + menuDetail.img" alt="">
+          <img v-if="menuDetail.pic" :src="menuDetail.pic" alt="">
         </div>
         <h1>{{ menuDetail.name }}</h1>
         <div class="rating">
@@ -41,91 +41,23 @@
         <h2>难度</h2>
         <span>易 👌</span>
       </div>
-      <!--<div class="recipe-time">
-        <div class="col-1">
-          <div class="time-cell" data-time="30">
-            <canvas width="160" height="160"></canvas>
-            <div class="time-container">
-              <div class="time">30</div>
-              <div class="unit">分钟</div>
-            </div>
-            <div class="title">准备</div>
-          </div>
-        </div>
-        <div class="col-2">
-          <div class="time-cell" data-time="0">
-            <canvas width="160" height="160"></canvas>
-            <div class="time-container">
-              <div class="time">0</div>
-              <div class="unit">分钟</div>
-            </div>
-            <div class="title">烘焙时间</div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="time-cell" data-time="0">
-            <canvas width="160" height="160"></canvas>
-            <div class="time-container">
-              <div class="time">0</div>
-              <div class="unit">分钟</div>
-            </div>
-            <div class="title">静置时间</div>
-          </div>
-        </div>
-      </div>-->
       <div class="recipe-ingredients">
         <h2>食材</h2>
         <ul class="recipe-ingredients-list">
-          <li v-for="item in menuFood">
-            <p>{{ item }}</p>
+          <li v-for="item in menuDetail.material">
+            <p>{{ item.mname }}</p>
+            <span>{{ item.amount }}</span>
           </li>
         </ul>
       </div>
       <div class="recipe-steps">
-        <h2>烹饪步骤</h2>
-        <div v-html="messageRender">
-        <!--    
+        <div class="step" v-for="(item, index) in menuDetail.process">
+          <h2>烹饪步骤 {{ (index+1) }}/{{ menuDetail.process.length }}</h2>
           <div class="step-image">
-            <img :src="require('assets/images/detail/R704-photo-step-1-large-landscape-200.jpg')" alt="">
+            <img :src="item.pic" alt="">
           </div>
-          <p class="text">{{ item }}</p>
-          -->
+          <p class="text">{{ item.pcontent }}</p>
         </div>
-  <!--  <div class="step">
-          <h2>烹饪步骤 1/6</h2>
-          <div class="step-image">
-            <img :src="require('assets/images/detail/R704-photo-step-2-large-landscape-200.jpg')" alt="">
-          </div>
-          <p class="text">将洋葱和蒜去皮剁碎。将灯笼椒切成易入口的大小。处理好虾和鱿鱼。</p>
-        </div>
-        <div class="step">
-          <h2>烹饪步骤 1/6</h2>
-          <div class="step-image">
-            <img :src="require('assets/images/detail/R704-photo-step-3-large-landscape-200.jpg')" alt="">
-          </div>
-          <p class="text">将洋葱和蒜去皮剁碎。将灯笼椒切成易入口的大小。处理好虾和鱿鱼。</p>
-        </div>
-        <div class="step">
-          <h2>烹饪步骤 1/6</h2>
-          <div class="step-image">
-            <img :src="require('assets/images/detail/R704-photo-step-4-large-landscape-200.jpg')" alt="">
-          </div>
-          <p class="text">将洋葱和蒜去皮剁碎。将灯笼椒切成易入口的大小。处理好虾和鱿鱼。</p>
-        </div>
-        <div class="step">
-          <h2>烹饪步骤 1/6</h2>
-          <div class="step-image">
-            <img :src="require('assets/images/detail/R704-photo-step-5-large-landscape-200.jpg')" alt="">
-          </div>
-          <p class="text">将洋葱和蒜去皮剁碎。将灯笼椒切成易入口的大小。处理好虾和鱿鱼。</p>
-        </div>
-        <div class="step">
-          <h2>烹饪步骤 1/6</h2>
-          <div class="step-image">
-            <img :src="require('assets/images/detail/R704-photo-step-6-large-landscape-200.jpg')" alt="">
-          </div>
-          <p class="text">将洋葱和蒜去皮剁碎。将灯笼椒切成易入口的大小。处理好虾和鱿鱼。</p>
-        </div>  -->
       </div>
     </div>
   </div>
@@ -160,10 +92,10 @@ export default {
 
   computed: {
     messageRender () {
-      var str = '</h2>'
-      var matched = this.menuDetail.message.split(str)
+      // var str = '</h2>'
+      // var matched = this.menuDetail.message.split(str)
 
-      return matched && (matched[2])
+      // return matched && (matched[2])
     }
   },
 
@@ -177,11 +109,11 @@ export default {
 
   created () {
     let id = this.$route.query.id
-      this.$http.get(`${this.API_ROOT}api/cook/show?id=${id}`).then((response) => {    
+      this.$http.get(`${this.API_ROOT}recipe/detail?appkey=d72db5a4b83925b1&id=${id}`).then((response) => {    
           // 响应成功回调
-          console.log(response)
-          this.menuDetail = response.body
-          this.menuFood = response.body.food.split(',')
+          // console.log(response)
+          this.menuDetail = response.body.result
+          // this.menuFood = response.body.food.split(',')
       }, (response) => {    
           // 响应错误回调
       });

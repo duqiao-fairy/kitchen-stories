@@ -16,7 +16,8 @@ const PROD_CONF = {
   },
 
   APIS: {
-    root: '//www.tngou.net/'
+    // root: '//www.tngou.net/'
+    root: '//www.api.jisuapi.com/'
   }
 }
 
@@ -93,7 +94,8 @@ const CONFIG = {
    * 跨域代理
    */
   PROXY_TABLE: { 
-    '/api/*': 'www.tngou.net'
+    '/api/*': 'www.tngou.net',
+    '/recipe/*': 'api.jisuapi.com'
   },
 
   /**

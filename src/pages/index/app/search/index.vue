@@ -29,10 +29,10 @@
             <div class="tile-feeditem">
               <a href="" class="tile-link">
                 <div class="tile-image-container">
-                  <img :src="'http://tnfs.tngou.net/img' + item.img" alt="" class="tile-image">
+                  <img :src="item.pic" alt="" class="tile-image">
                 </div>
                 <div class="tile-text">
-                  <p class="title">{{ item.name }}</p>
+                  <p class="title">{{ item.name.substr(0,7) }}</p>
                 </div>
               </a>
             </div>
@@ -64,11 +64,11 @@ export default {
       emoji: [
         [{
           html: '🍚',
-          search: '炒饭'
+          search: '饭'
         },
         {
           html: '🍤',
-          search: '油焖大虾'
+          search: '虾'
         },
         {
           html: '🍸',
@@ -84,7 +84,7 @@ export default {
         },
         {
           html: '🍳',
-          search: '煎蛋'
+          search: '蛋'
         }],
         [{
           html: '🍆',
@@ -114,11 +114,10 @@ export default {
     },
     '$route.query.id' (newval) {
       this.id = newval
-      // console.log(11111111)
-      this.$http.jsonp(`${this.API_ROOT}api/cook/list?id=` + this.id).then((response) => {    
+      this.$http.jsonp(`${this.API_ROOT}recipe/byclass?start=0&num=16&appkey=d72db5a4b83925b1&classid=` + this.id).then((response) => {    
       // 响应成功回调
       // console.log(response)
-      this.searchList = response.body.tngou
+      this.searchList = response.body.result.list
       // console.log(this.searchList)
     }, (response) => {    
       // 响应错误回调
@@ -134,11 +133,11 @@ export default {
     getCooks () {
       this.type = '食谱'
       // debugger
-      this.$http.jsonp(`${this.API_ROOT}api/cook/name?name=` + this.searchValue).then((response) => {    
+      this.$http.jsonp(`${this.API_ROOT}recipe/search?num=16&appkey=d72db5a4b83925b1&keyword=` + this.searchValue).then((response) => {    
         // 响应成功回调
-        this.searchList = response.body.tngou
-        console.log(this.searchList)
-        if (this.searchList.length === 0) {
+        this.searchList = response.body.result.list
+        // console.log(this.searchList)
+        if (!this.searchList) {
           this.imgStatus = true
         } else {
           this.imgStatus = false
@@ -168,13 +167,14 @@ export default {
   },
 
   created () {
+    // 根据菜谱分类查找
+    // debugger;
     console.log(this.id)
-
-    this.id || (this.id = 1)
-    this.$http.jsonp(`${this.API_ROOT}api/cook/list?id=` + this.id).then((response) => {    
+    this.id || (this.id = 2)
+    this.$http.jsonp(`${this.API_ROOT}recipe/byclass?start=0&num=16&appkey=d72db5a4b83925b1&classid=` + this.id).then((response) => {    
       // 响应成功回调
       // console.log(response)
-      this.searchList = response.body.tngou
+      this.searchList = response.body.result.list
       // console.log(this.searchList)
     }, (response) => {    
       // 响应错误回调

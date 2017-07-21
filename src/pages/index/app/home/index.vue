@@ -12,7 +12,9 @@
     </div>
     <div class="img-list new-cookbook">
       <h2 class="title">新食谱</h2>
-      <span class="search-all">查看全部</span>
+      <router-link :to="{path: '/search', query: {id: 109}}">
+        <span class="search-all">查看全部</span>
+      </router-link>
       <div class="img-wraper-content">
         <div class="imgs-wraper">
           <!-- <a href="/vueindex.html#/detail" class="img-s" v-for="item in menuList">
@@ -24,10 +26,10 @@
           </a> -->
           <div class="img-s" v-for="item in menuList">
             <router-link :to="{path: '/detail', query: {id: item.id}}">
-              <img :src="'http://tnfs.tngou.net/img' + item.img" alt="">
+              <img :src="item.pic" alt="">
               <div class="total-time">55分钟</div>
               <div class="title-wraper">
-                <p class="title">{{ item.name }}</p>
+                <p class="title">{{ item.name.substr(0,7) }}</p>
               </div>
             </router-link>
           </div>
@@ -47,16 +49,18 @@
     </div>
     <div class="img-list week-dinner">
       <h2 class="title">本周晚餐</h2>
-      <span class="search-all">查看全部</span>
+      <router-link :to="{path: '/search', query: {id: 108}}">
+        <span class="search-all">查看全部</span>
+      </router-link>
       <div class="img-wraper-content">
         <div class="imgs-wraper">
           <div class="img-s" v-for="(item, index) in weekMenuList">
             <router-link :to="{path: '/detail', query: {id: item.id}}">
-              <img :src="'http://tnfs.tngou.net/img' + item.img" alt="">
+              <img :src="item.pic" alt="">
               <div class="total-time">55分钟</div>
               <div class="title-wraper">
                 <p class="title">{{ weekDays[index] }}</p>
-                <p class="title">{{ item.name }}</p>
+                <p class="title">{{ item.name.substr(0,7) }}</p>
               </div>
             </router-link>
           </div>
@@ -151,37 +155,40 @@
       }
     },
     created () {
-      // console.log(this.constructor)
-      // this.$http.jsonp('http://www.tngou.net/api/cook/list?cb=').then((response) => {    
+      // 天云狗接口
+      // this.$http.jsonp(`${this.API_ROOT}api/cook/list?rows=7`).then((response) => {    
       //     // 响应成功回调
-      //     console.log(response)
+      //     // console.log(response)
+      //     this.menuList = response.body.tngou
       // }, (response) => {    
       //     // 响应错误回调
       // });
 
-      // this.$http.get('http://www.tngou.net/api/cook/list').then((response) => {    
+      // this.$http.jsonp(`${this.API_ROOT}api/cook/list?id=9&rows=7`).then((response) => {    
       //     // 响应成功回调
-      //     console.log(response)
+      //     // console.log(response)
+      //     this.weekMenuList = response.body.tngou
       // }, (response) => {    
       //     // 响应错误回调
       // });
-
-      this.$http.jsonp(`${this.API_ROOT}api/cook/list?rows=7`).then((response) => {    
+      // 天云狗接口结束
+      // 极速数据接口
+      this.$http.jsonp(`${this.API_ROOT}recipe/byclass?start=0&num=8&appkey=d72db5a4b83925b1&classid=109`).then((response) => {    
           // 响应成功回调
           // console.log(response)
-          this.menuList = response.body.tngou
+          this.menuList = response.body.result.list
+          // console.log(this.menuList)
       }, (response) => {    
           // 响应错误回调
       });
-
-      this.$http.jsonp(`${this.API_ROOT}api/cook/list?id=9&rows=7`).then((response) => {    
+      this.$http.jsonp(`${this.API_ROOT}recipe/byclass?start=0&num=7&appkey=d72db5a4b83925b1&classid=108`).then((response) => {    
           // 响应成功回调
           // console.log(response)
-          this.weekMenuList = response.body.tngou
+          this.weekMenuList = response.body.result.list
       }, (response) => {    
           // 响应错误回调
       });
-
+      // 极速数据接口结束
     }
   }
 

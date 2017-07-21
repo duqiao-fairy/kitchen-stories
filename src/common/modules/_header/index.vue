@@ -77,7 +77,6 @@ const app = {
 
   }
 }
-console.log(132)
 
 export default app
 </script>

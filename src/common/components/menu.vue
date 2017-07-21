@@ -7,7 +7,7 @@
   <div class="container" id="container">
     <nav>
       <ul @click="hideMenuHandler" v-for="item in classifyList">
-        <li><router-link :to="{path: '/search', query: {type: item.name, id: item.id} }" class="recipes"  @click="hideMenuHandler">{{ item.name }}</router-link></li>
+        <li><router-link :to="{path: '/search', query: {type: item.name, id: item.classid} }" class="recipes"  @click="hideMenuHandler">{{ item.name }}</router-link></li>
       </ul>
     </nav>
   </div>
@@ -55,11 +55,10 @@ export default {
   },
 
   created () {
-    this.$http.jsonp(`${this.API_ROOT}api/cook/classify`).then((response) => {    
+    this.$http.jsonp(`${this.API_ROOT}recipe/class?appkey=d72db5a4b83925b1`).then((response) => {    
       // 响应成功回调
-      console.log(response)
-      this.classifyList = response.body.tngou
-      console.log(this.classifyList)
+      this.classifyList = response.body.result[0].list
+      // console.log(this.classifyList)
     }, (response) => {    
       // 响应错误回调
     });
