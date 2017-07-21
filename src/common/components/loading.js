@@ -8,74 +8,7 @@
  * loading.show('entry') | loading.show()
  * loading.hide('entry') | loading.hide()
  */
-
-import flexible from 'utils/flexible'
 import common from 'utils/common'
-
-const dpr = flexible.dpr
-
-const styles = {
-  wrapper: `
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0);
-    color: #fff;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align: center;
-    z-index: 3888;`,
-
-  outerChildStyle: (() => {
-    let outerMarginSize = flexible.px2rem(35 * dpr)
-    let outerWidthSize = flexible.px2rem(70 * dpr)
-    
-    return `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: ${outerWidthSize}rem;
-      height: ${outerWidthSize}rem;
-      margin-top: -${outerMarginSize}rem;
-      margin-left: -${outerMarginSize}rem;
-      background-color: rgba(0, 0, 0, .7);
-      border-radius: ${flexible.px2rem(10 * dpr)}rem;
-    `
-  })(),
-
-  innerChildStyle: (() => {
-    let childMarginSize = flexible.px2rem(15 * dpr) + 'rem'
-    let childWidthSize = flexible.px2rem(26 * dpr) + 'rem'
-    
-    return `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-top: -${childMarginSize};
-      margin-left: -${childMarginSize};
-      height: ${childWidthSize};
-      width: ${childWidthSize};
-      display: inline-block;
-      border-radius: 999px;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-      border: ${2 * dpr}px solid #00d8c9;
-      border-bottom-color: transparent;
-      background-color: transparent;
-      -webkit-animation: rotate 1.2s 0s linear infinite;
-      animation: rotate 1.2s 0s linear infinite;
-    `
-  })()
-}
-
-const templateHTML = `<div style="${styles.wrapper}">
-  <div style="${styles.outerChildStyle}">
-    <div style="${styles.innerChildStyle}"></div>
-  </div>
-</div>`
-
 
 // 单例
 const __instance__ = (function () {
@@ -115,15 +48,12 @@ const _loadingMods = {
 const TIME_OUT_NUM = 5000
 
 // eslint-disable-next-line
-export default new class AutoLoading {
-  constructor () {
+class AutoLoading {
+  constructor (el) {
     if (__instance__(null)) return __instance__(null)
     __instance__(this)
 
-    this.loadingElem = _createNode()
-
-    document.body.appendChild(this.loadingElem)
-    document.body.appendChild(_createStyle())
+    this.loadingElem = document.getElementById(el)
   }
 
   show (id) {
@@ -133,7 +63,7 @@ export default new class AutoLoading {
 
     // 队里里面为0的时候, 开始阻止
     if (queue.length === 0) {
-      this.preventDocumentDefault();
+      this._preventDocumentDefault();
     }
     queue.push(1)
     this.loadingElem.style.display = 'block'
@@ -175,30 +105,30 @@ export default new class AutoLoading {
     loadingMod.isWait = false
 
     if (Object.keys(_loadingMods).every((key) => _loadingMods[key].queue.length === 0)) {
-      this.removePreventDocument();
+      this._removePreventDocument();
       this.loadingElem.style.display = 'none'
     }
   }
 
-  returnFalse () {
+  _returnFalse () {
     return false;
   }
 
   /**
    * 清除 页面中的默认事件 , 让你乱点
    */
-  preventDocumentDefault () {
-    let returnFalse = this.returnFalse;
-    document.addEventListener('touchstart', returnFalse);
-    document.addEventListener('touchmove', returnFalse);
-    document.addEventListener('touchend', returnFalse);
+  _preventDocumentDefault () {
+    let _returnFalse = this._returnFalse;
+    document.addEventListener('touchstart', _returnFalse);
+    document.addEventListener('touchmove', _returnFalse);
+    document.addEventListener('touchend', _returnFalse);
   }
 
-  removePreventDocument () {
-    let returnFalse = this.returnFalse;
-    document.removeEventListener('touchstart', returnFalse);
-    document.removeEventListener('touchmove', returnFalse);
-    document.removeEventListener('touchend', returnFalse);
+  _removePreventDocument () {
+    let _returnFalse = this._returnFalse;
+    document.removeEventListener('touchstart', _returnFalse);
+    document.removeEventListener('touchmove', _returnFalse);
+    document.removeEventListener('touchend', _returnFalse);
   }
 
   getModById (id) {
@@ -206,31 +136,4 @@ export default new class AutoLoading {
   }
 }
 
-
-function _createNode () {
-  const _node = document.createElement('div')
-
-  _node.innerHTML = templateHTML
-
-  _node.style.display = 'none'
-
-  _node.addEventListener('touchstart', (e) => {
-    e.preventDefault()
-  })
-
-  return _node
-}
-
-function _createStyle () {
-  const _style = document.createElement('style')
-
-  _style.innerText = `
-    @-webkit-keyframes rotate {
-      0% {-webkit-transform: rotate(0deg) scale(1);transform: rotate(0deg) scale(1);}
-      50% {-webkit-transform: rotate(180deg) scale(1);transform: rotate(180deg) scale(1); }
-      100% {-webkit-transform: rotate(360deg) scale(1);transform: rotate(360deg) scale(1); }
-    }
-  `
-
-  return _style
-}
+export default new AutoLoading('globalLoading')

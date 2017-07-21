@@ -9,12 +9,12 @@
     <!-- pc端直接写入, 移动端 flexible 来注入 -->
       <!--<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">-->
     <meta name="application-name" content="<%= htmlWebpackPlugin.options.params.kewords %>">
-    <meta name="renderer" content="webkit">
+    <!-- <meta name="renderer" content="webkit">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Cache" content="no-cache">
     <meta http-equiv="Expires" content="Wed, 26 Feb 1997 08:21:57 GMT"> 
-    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Expires" content="0"> -->
     <link rel="shortcut icon" href="<%- htmlWebpackPlugin.options.params.onlineConfig.assetsPublicPath %>static/img/favicon.ico">
     <meta name="keywords" content="<%= htmlWebpackPlugin.options.params.keywords %>">
     <meta name="description" content="<%= htmlWebpackPlugin.options.params.description %>">
@@ -26,13 +26,136 @@
      -->    
   
     <script>
+      // 高清方案js
+      (function(f){var c=f;var g=f.lib||(f.lib={});var d=g.flexible||(g.flexible={});var s=c.document;var b=s.documentElement;var o=s.querySelector('meta[name="viewport"]');var p=s.querySelector('meta[name="flexible"]');var a=0;var r=0;var n;if(o){var e=o.getAttribute("content").match(/initial\-scale=([\d\.]+)/);if(e){r=parseFloat(e[1]);a=parseInt(1/r)}}else{if(p){var m=p.getAttribute("content");if(m){var q=m.match(/initial\-dpr=([\d\.]+)/);var j=m.match(/maximum\-dpr=([\d\.]+)/);if(q){a=parseFloat(q[1]);r=parseFloat((1/a).toFixed(2))}if(j){a=parseFloat(j[1]);r=parseFloat((1/a).toFixed(2))}}}}if(!a&&!r){var l=navigator.appVersion.match(/(iphone|ipad|ipod)/gi);if(l){if(devicePixelRatio>=3&&(!a||a>=3)){a=3}else{if(devicePixelRatio>=2&&(!a||a>=2)){a=2}else{a=1}}}else{a=1}r=1/a}b.setAttribute("data-dpr",a);if(!o){o=s.createElement("meta");o.setAttribute("name","viewport");o.setAttribute("content","initial-scale="+r+", maximum-scale="+r+", minimum-scale="+r+", user-scalable=no");if(b.firstElementChild){b.firstElementChild.appendChild(o)}else{var h=s.createElement("div");h.appendChild(o);s.write(h.innerHTML)}}var k=function(){var t=b.getBoundingClientRect().width;if(f.screen.width===t){t=t*a}var u=t/10;b.style.fontSize=u+"px";d.rem=u};var i=function(){if(requestAnimationFrame){requestAnimationFrame(k)}else{setTimeout(k,150)}};c.addEventListener("resize",i,false);c.addEventListener("pageshow",function(t){if(t.persisted){i()}},false);k();d.dpr=a;d.refreshRem=k;d.rem2px=function(u){var t=parseFloat(u)*this.rem;if(typeof u==="string"&&u.match(/rem$/)){t+="px"}return t};d.px2rem=function(u){var t=parseFloat(u)/this.rem;if(typeof u==="string"&&u.match(/px$/)){t+="rem"}return t}})(window);
+
+      // 因为DllReferencePlugin这个插件, Promise这个 polyfill 会在webpack的模块引用之后才会生效, 但是webpack初始化的模块引用依赖Promise, 所以会报错 Promise is undefined, 这里 document.writeln来解决一下
+      if(!window.Promise) { document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>'); }
+
       var __checkLogin__ = <%- htmlWebpackPlugin.options.params.checkoutLogin || false %>;
       var __prodHide__ = <%- htmlWebpackPlugin.options.params.prodHide || false %>;
       var __argv__ = <%= JSON.stringify(htmlWebpackPlugin.options.params.argv) || false %>;
     </script>
+    <style type="text/css">
+      .global-loading-wrapper {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 9999;
+      }
+      .global-loading {
+        width: .8rem;
+        height: .8rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -.4rem;
+        margin-top: -.4rem;
+        animation: globalLoading 3s linear infinite;
+        -webkit-animation: globalLoading 3s linear infinite;
+      }
+      .global-loading div {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+      .global-loading span {
+        display: inline-block;
+        width: .267rem;
+        height: .267rem;
+        border-radius: 999px;
+        background-color: #00d8c9;
+        position: absolute;
+        left: 50%;
+        margin-top: -.133rem;
+        margin-left: -.133rem;
+        animation: globalChangeBgColor 3s ease infinite;
+        -webkit-animation: globalChangeBgColor 3s ease infinite;
+      }
+      .global-loading div:nth-child(2) {
+        transform: rotate(120deg);
+        -webkit-transform: rotate(120deg);
+      }
+      .global-loading div:nth-child(3) {
+        transform: rotate(240deg);
+        -webkit-transform: rotate(240deg);
+      }
+      .global-loading div:nth-child(2) span {
+        animation-delay: 1s;
+        -webkit-animation-delay: 1s;
+        background-color: #FFFF66;
+      }
+      .global-loading div:nth-child(3) span {
+        animation-delay: 2s;
+        -webkit-animation-delay: 2s;
+        background-color: #FF6666;
+      }
+
+      @keyframes globalLoading {
+        0%{
+          transform: rotate(0deg);
+        }
+        33.3%{
+          transform: rotate(120deg);
+        }
+        66.6%{
+          transform: rotate(240deg);
+        }
+        100%{
+          transform: rotate(360deg);
+        }
+      }
+      @-webkit-keyframes globalLoading {
+        0%{
+          -webkit-transform: rotate(0deg);
+        }
+        33.3%{
+          -webkit-transform: rotate(120deg);
+        }
+        66.6%{
+          -webkit-transform: rotate(240deg);
+        }
+        100%{
+          -webkit-transform: rotate(360deg);
+        }
+      }
+      @-webkit-keyframes globalChangeBgColor {
+        0%,100%{
+          background-color: #00d8c9;
+        }
+        33.3%{
+          background-color: #FFFF66;
+        }
+        66.6%{
+          background-color: #FF6666;
+        }
+      }
+      @keyframes globalChangeBgColor {
+        0%,100%{
+          background-color: #00d8c9;
+        }
+        33.3%{
+          background-color: #FFFF66;
+        }
+        66.6%{
+          background-color: #FF6666;
+        }
+      } 
+    </style>
   </head>
   <body>
-    <div id="app">
+    <!-- 全局loading -->
+    <div class="global-loading-wrapper" id="globalLoading">
+      <div class="global-loading" >
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+      </div>
+    </div>
+    <div id="root">
     </div>
 
     <% if (htmlWebpackPlugin.options.params.isVue) {%>
@@ -61,13 +184,6 @@
       <% } %>
     <% } %>
 
-    <% if (htmlWebpackPlugin.options.params.isZepto) {%>
-      <% if (htmlWebpackPlugin.options.params.env === 'production') {%>
-        <script src="https://unpkg.com/zepto@1.2.0/dist/zepto.min.js"></script>
-      <%} else {%>
-        <script src="<%- htmlWebpackPlugin.options.params.onlineConfig.assetsPublicPath %>static/lib/zepto/zepto.js"></script>      
-      <% } %>
-    <% } %>
 
     <% if (htmlWebpackPlugin.options.params.isWeixin) {%>
       <% if (htmlWebpackPlugin.options.params.env === 'production') {%>

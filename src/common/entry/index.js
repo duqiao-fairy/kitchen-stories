@@ -1,6 +1,6 @@
 import 'common/less/base'
 
-import flexible from 'utils/flexible'
+// import flexible from 'utils/flexible'
 import $common from 'utils/common'
 import loading from 'components/loading'
 import Vue from 'vue'
@@ -8,6 +8,7 @@ import VueResource from 'vue-resource'
 import S from 'service'
 import vueProtoMix from './vueProtoMix'
 import directives from '../directives'
+import httpRequest from './http-request'
 // import shareInit from './shareInit'
 // import userInit from './userInit'
 
@@ -22,7 +23,11 @@ Vue.config.productionTip = false
 // 注册 VueResource
 Vue.use(VueResource)
 
+// 质量注册
 directives.init(Vue)
+
+// http请求相关配置和拦截
+httpRequest.init(Vue)
 
 // 初始化service
 S.$service.setReqInstance('VueResource'.toUpperCase(), Vue.http)
@@ -70,7 +75,7 @@ const fn = (App, Options) => {
   // }
 
   new Vue({
-    el: '#app',
+    el: '#root',
     store,
     router,
     components: { App },
