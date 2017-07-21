@@ -18,7 +18,7 @@
         <img src="../../../assets/images/header/icon_quick_action_search.svg" alt="">
       </div>
     </router-link>
-    <c-menu v-show="showMenu" v-on:hide-menu="hideMenuHander">
+    <c-menu v-show="showMenu" v-on:hide-menu="hideMenuHander" :show-menu="showMenu">
     </c-menu>
   </div>
 

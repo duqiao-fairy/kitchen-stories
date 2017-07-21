@@ -26,7 +26,7 @@ export default {
       documentHandler,
       methodName: binding.expression
     };
-    // NAPI.listener.on(document, 'click', documentHandler);
+    document.addEventListener('click', documentHandler);
   },
 
   update(el, binding) {
@@ -34,7 +34,7 @@ export default {
   },
 
   unbind(el) {
-    // NAPI.listener.off(document, 'click', el[CLICK_OUT_SIDE_CONTEXT].documentHandler);
+    document.addEventListener('click', el[CLICK_OUT_SIDE_CONTEXT].documentHandler);
   },
 
   install(Vue) {

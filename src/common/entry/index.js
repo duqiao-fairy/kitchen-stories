@@ -7,6 +7,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import S from 'service'
 import vueProtoMix from './vueProtoMix'
+import directives from '../directives'
 // import shareInit from './shareInit'
 // import userInit from './userInit'
 
@@ -20,6 +21,8 @@ Vue.config.productionTip = false
 
 // 注册 VueResource
 Vue.use(VueResource)
+
+directives.init(Vue)
 
 // 初始化service
 S.$service.setReqInstance('VueResource'.toUpperCase(), Vue.http)

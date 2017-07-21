@@ -5,7 +5,9 @@
 -->
 <template>
   <div class="container" id="container">
-    <nav>
+    <nav 
+      v-clickoutside="navClickOutSideHandler"
+    >
       <ul @click="hideMenuHandler" v-for="item in classifyList">
         <li><router-link :to="{path: '/search', query: {type: item.name, id: item.classid} }" class="recipes"  @click="hideMenuHandler">{{ item.name }}</router-link></li>
       </ul>
@@ -20,7 +22,10 @@ export default {
   mixins: [],
 
   props: {
-
+    showMenu: {
+      type: Boolean,
+      default: false
+    }
   },
   
   components: {
@@ -29,13 +34,18 @@ export default {
 
   data () {
     return {
+      shown: false,
       classifyList: [],
       API_ROOT: srcConfig.API_ROOT
     }
   },
 
   watch: {
-
+    showMenu (newVal) {
+      setTimeout(() => {
+        this.shown = newVal
+      }, 16)
+    }
   },
 
   computed: {
@@ -47,6 +57,12 @@ export default {
       // debugger
       // hideMenu: 事件名称
       this.$emit('hide-menu', '参数')
+    },
+
+    navClickOutSideHandler () {
+      if (this.shown) {
+        this.hideMenuHandler()
+      }
     }
   },
 
@@ -66,6 +82,9 @@ export default {
 
   mounted () {
 
+  },
+
+  updated (e) {
   },
 
   render (h) {
@@ -88,7 +107,7 @@ export default {
   font-weight: @theme-font-weight;
   font-family: @theme-font-family;
   
-  padding-top: 95px;
+  padding-top: 35px;
   top: 101px;
   padding-left: 10 * 2px;
   padding-right: 10 * 2px;
@@ -100,7 +119,7 @@ export default {
   overflow: auto;
 
   nav {
-
+    padding-bottom: 95 * 2px;
     ul {
       margin-left: 24 * 2px;
       margin-right: 24 * 2px;
