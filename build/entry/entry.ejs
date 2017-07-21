@@ -160,6 +160,14 @@
 
     <% if (htmlWebpackPlugin.options.params.isVue) {%>
       <% if (htmlWebpackPlugin.options.params.env === 'production') {%>
+        <script src="<%- htmlWebpackPlugin.options.params.onlineConfig.assetsPublicPath %>static/dll/lib.dll.js"></script>      
+      <%} else {%>
+        <script src="<%- htmlWebpackPlugin.options.params.onlineConfig.assetsPublicPath %>static/dll/lib_dev.dll.js"></script>      
+      <% } %>
+    <% } %>
+    
+    <!-- <% if (htmlWebpackPlugin.options.params.isVue) {%>
+      <% if (htmlWebpackPlugin.options.params.env === 'production') {%>
         <script src="https://unpkg.com/vue@2.3.3/dist/vue.min.js"></script>
         <script src="https://unpkg.com/vue-resource@1.3.3/dist/vue-resource.min.js"></script>
       <%} else {%>
@@ -182,8 +190,9 @@
       <%} else {%>
         <script src="<%- htmlWebpackPlugin.options.params.onlineConfig.assetsPublicPath %>static/lib/vue/vue-router.js"></script>      
       <% } %>
-    <% } %>
+    <% } %> -->
 
+      
 
     <% if (htmlWebpackPlugin.options.params.isWeixin) {%>
       <% if (htmlWebpackPlugin.options.params.env === 'production') {%>

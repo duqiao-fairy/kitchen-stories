@@ -1,5 +1,4 @@
-# boc-duqiao-build
-boc.duqiao.cn通用build层
+# 通用build层
 
 
 ## 使用方式
@@ -22,5 +21,29 @@ npm run build:gray
 
 生产环境: 线上
 npm run build
+
+```
+
+### 优化
+
+1. 将大型库外链
+
+2. 将库预编译
+
+3. 减少构建搜索
+
+4. 利用缓存
+
+5. happypack 并行打包
+
+6. commonPluginChunk 提取公共模块
+
+7. 优化代码丑化
+
+8. code split
+  require.ensure
+  router
+
+8. tree shaking
 
 ```

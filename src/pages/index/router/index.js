@@ -12,17 +12,17 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: require('../app/home')
+      component: () => import('../app/home')
     },
     {
       path: '/detail',
       name: 'detail',
-      component: require('../app/detail')
+      component: () => import('../app/detail')
     },
     {
       path: '/search',
       name: 'search',
-      component: require('../app/search')
+      component: () => import('../app/search')
     }
   ]
 })

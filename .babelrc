@@ -6,6 +6,10 @@
   "plugins": [
     "transform-runtime", 
     "transform-vue-jsx",
+    "transform-class-properties",
+    "transform-decorators-legacy",
+    "transform-async-to-generator",
+    "dynamic-import-webpack",
     [
       "component", 
       [

@@ -4,6 +4,9 @@ var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var entry = require('../entry')
 var webpack = require('webpack')
+var HappyPack = require('happypack')
+var getHappyPackConfig = require('./happypack.conf')
+
 var postcssConf = require('../../.postcssrc.js')
 var srcConfig = config.srcConfig
 var SCHEME = srcConfig.SCHEME
@@ -11,10 +14,10 @@ var SCHEME = srcConfig.SCHEME
 var resolve = utils.rootPathResolve
 
 var defaultExternals = {
-  'vue': 'Vue',
-  'vue-router': 'VueRouter',
-  'vuex': 'Vuex',
-  'vue-resource': 'VueResource',
+  // 'vue': 'Vue',
+  // 'vue-resource': 'VueResource',
+  // 'vue-router': 'VueRouter',
+  // 'vuex': 'Vuex',
   'zepto': 'zepto'
 }
 
@@ -25,15 +28,15 @@ var defaultExcludePath = [/node_modules/, resolve('src/assets'), resolve('src/co
 var defaultVendors = ['vue', 'vue-router', 'vuex', 'vue-resource']
 
 var externalsMap = {
-  'inmyworld.cn': {}
+
 }
 
 var excludeMap = {
-  'inmyworld.cn': [/node_modules/, resolve('src/assets')]
+
 }
 
 var vendorMap = {
-  'inmyworld.cn': defaultVendors
+
 }
 
 // 映天下 不能排除 element根目录, 因为用的是iview组件
@@ -41,7 +44,7 @@ var jsExcludePath = excludeMap[SCHEME] || defaultExcludePath
 
 var externals = /*externalsMap[SCHEME] || */defaultExternals
 
-var vendors = /*vendorMap[SCHEME] || */[]
+var vendors = vendorMap[SCHEME] || []
 
 var entries = entry.getEntries()
 
@@ -52,6 +55,7 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
+    chunkFilename: '[name].[id].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
@@ -69,34 +73,25 @@ module.exports = {
 
   module: {
     rules: [
-      // {
-      //   test: /\.(js|vue)$/,
-      //   loader: 'eslint-loader',
-      //   enforce: 'pre',
-      //   include: defaultIncludePath,
-      //   exclude: defaultExcludePath.concat([resolve('src/mocks')]),
-      //   options: {
-      //     formatter: require('eslint-friendly-formatter')
-      //   }
-      // },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
         include: defaultIncludePath,
         exclude: [/node_modules/, resolve('src/mocks'), resolve('src/assets')],
-        options: vueLoaderConfig        
+        use: [{
+          loader: 'happypack/loader?id=vue',
+        }]      
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
         include: defaultIncludePath,
-        exclude: jsExcludePath
+        exclude: jsExcludePath,
+        loader: 'happypack/loader?id=js',
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 5000,
+          limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
@@ -104,7 +99,7 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 5000,
+          limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
@@ -116,13 +111,36 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: { 
-        vue: {
-          // use custom postcss plugins, 已在 .postcssrc.js 里配置
-          // postcss: [require('postcss-px2rem')(postcssConf.plugins['postcss-px2rem'])]
+    new HappyPack(getHappyPackConfig({
+      id: 'vue',
+      loaders: [{
+        loader: 'vue-loader',
+        query: vueLoaderConfig
+      }]
+    })),
+
+    new HappyPack(getHappyPackConfig({
+      id: 'js',
+      loaders: [{
+        loader: 'babel-loader',
+        query: {
+          cacheDirectory: './webpack_cache/'
         },
-      }
-    })
+      }]
+    })),
+
+    // less 配置目前已由函数封装, 再次配置比较繁琐, 暂时不考虑
+    new HappyPack(getHappyPackConfig({
+      id: 'less',
+      loaders: ['vue-style-loader', 'css-loader', 'less-loader']
+    }))
+    // new webpack.LoaderOptionsPlugin({
+    //   options: { 
+    //     vue: {
+    //       // use custom postcss plugins, 已在 .postcssrc.js 里配置
+    //       // postcss: [require('postcss-px2rem')(postcssConf.plugins['postcss-px2rem'])]
+    //     },
+    //   }
+    // })
   ]  
 }
