@@ -246,13 +246,14 @@ export default {
     .emoji {
       display: inline-block;
       width: 16 * 2px;
+      // background-color: red;
       height: 22 * 2px;
-      font-size: 32px;
+      font-size: 16 * 2px;
       margin-right: 14px;
     }
 
     .search-button {
-      width: 120 * 2px;
+      width: 115 * 2px;
       height: 48 * 2px;
       background-color: #ffcd02;
       color: #fff;
