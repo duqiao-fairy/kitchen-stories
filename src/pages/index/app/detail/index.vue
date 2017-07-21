@@ -109,7 +109,7 @@ export default {
 
   created () {
     let id = this.$route.query.id
-      this.$http.get(`${this.API_ROOT}recipe/detail?appkey=d72db5a4b83925b1&id=${id}`).then((response) => {    
+      this.$http.jsonp(`${this.API_ROOT}recipe/detail?appkey=d72db5a4b83925b1&id=${id}`).then((response) => {    
           // 响应成功回调
           // console.log(response)
           this.menuDetail = response.body.result

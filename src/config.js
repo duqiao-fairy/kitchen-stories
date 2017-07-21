@@ -17,7 +17,7 @@ const PROD_CONF = {
 
   APIS: {
     // root: '//www.tngou.net/'
-    root: '//www.api.jisuapi.com/'
+    root: '//api.jisuapi.com/'
   }
 }
 
