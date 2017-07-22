@@ -23,6 +23,11 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: require('../app/search')
+    },
+    {
+      path: '/today',
+      name: 'today',
+      component: require('../app/today')
     }
   ]
 })
