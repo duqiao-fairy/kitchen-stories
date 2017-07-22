@@ -22,12 +22,12 @@ export default new Router({
     {
       path: '/search',
       name: 'search',
-      component: require('../app/search')
+      component: () => import('../app/search')
     },
     {
       path: '/today',
       name: 'today',
-      component: require('../app/today')
+      component: () => import('../app/today')
     }
   ]
 })
