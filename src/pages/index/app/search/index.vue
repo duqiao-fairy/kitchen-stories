@@ -101,6 +101,7 @@ export default {
       ],
       type: this.$route.query.type,
       id: this.$route.query.id,
+      name: this.$route.query.name,
       searchValue: '',
       searchList: [],
       API_ROOT: srcConfig.API_ROOT
@@ -167,18 +168,26 @@ export default {
   },
 
   created () {
-    // 根据菜谱分类查找
-    // debugger;
-    console.log(this.id)
-    this.id || (this.id = 2)
-    this.$http.jsonp(`${this.API_ROOT}recipe/byclass?start=0&num=16&appkey=d72db5a4b83925b1&classid=` + this.id).then((response) => {    
-      // 响应成功回调
-      // console.log(response)
-      this.searchList = response.body.result.list
-      // console.log(this.searchList)
-    }, (response) => {    
-      // 响应错误回调
-    });
+    if (this.name) {
+      // 根据菜谱名称查找
+      this.$http.jsonp(`${this.API_ROOT}recipe/search?num=16&appkey=d72db5a4b83925b1&keyword=` + this.name).then((response) => {    
+        // 响应成功回调
+        this.searchList = response.body.result.list
+      }, (response) => {    
+        // 响应错误回调
+      });
+    } else {
+      // 根据菜谱分类查找
+      console.log(this.id)
+      this.id || (this.id = 2)
+      this.$http.jsonp(`${this.API_ROOT}recipe/byclass?start=0&num=16&appkey=d72db5a4b83925b1&classid=` + this.id).then((response) => {    
+        // 响应成功回调
+        this.searchList = response.body.result.list
+      }, (response) => {    
+        // 响应错误回调
+      });
+    }
+
   },
 
   mounted () {

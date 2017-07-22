@@ -1,33 +1,27 @@
 <template>
   <div class="container" id="container">
+  <router-link :to="{path: '/today'}">
     <div class="img-one today-story">
       <h2 class="title">今日故事</h2>
       <div class="img-wraper">
-        <img :src="require('assets/images/index/A385-photo-final-4x3-medium-landscape-200.jpg')" alt="">
+        <img :src="require('assets/images/index/A392-photo-final-4x3-medium-landscape-200.jpg')" alt="">
       </div>
       <div class="description">
-        <p class="title">草莓: 你不知道的4个真相</p>
-        <p class="sub-title">房故事草莓周!</p>
+        <p class="title">你好， 我是冰淇淋</p>
+        <p class="sub-title">一起来做冰淇淋吧!</p>
       </div>
     </div>
+  </router-link>
     <div class="img-list new-cookbook">
       <h2 class="title">新食谱</h2>
-      <router-link :to="{path: '/search', query: {id: 109}}">
+      <router-link :to="{path: '/search', query: {type: '新食谱', id: 109}}">
         <span class="search-all">查看全部</span>
       </router-link>
       <div class="img-wraper-content">
         <div class="imgs-wraper">
-          <!-- <a href="/vueindex.html#/detail" class="img-s" v-for="item in menuList">
-            <img :src="'http://tnfs.tngou.net/img' + item.img" alt="">
-            <div class="total-time">55分钟</div>
-            <div class="title-wraper">
-              <p class="title">{{ item.name }}</p>
-            </div>
-          </a> -->
           <div class="img-s" v-for="item in menuList">
             <router-link :to="{path: '/detail', query: {id: item.id}}">
               <img :src="item.pic" alt="">
-              <div class="total-time">55分钟</div>
               <div class="title-wraper">
                 <p class="title">{{ item.name.substr(0,7) }}</p>
               </div>
@@ -39,17 +33,19 @@
     </div>
     <div class="img-one easy-fast">
       <h2 class="title">简单快捷</h2>
+      <router-link :to="{path: '/detail', query: {id: 9416}}">
       <div class="img-wraper">
-        <img :src="require('assets/images/index/RP16_02_69_Brigadeiro_4x3-medium-landscape-200.jpg')" alt="">
+        <img :src="require('assets/images/index/PerfectSteak_Final-medium-landscape-200.jpg')" alt="">
       </div>
       <div class="description">
-        <p class="title">巴西巧克力球</p>
+        <p class="title">煎牛排</p>
         <p class="sub-title">意想不到的美味~</p>
       </div>
+      </router-link>
     </div>
     <div class="img-list week-dinner">
       <h2 class="title">本周晚餐</h2>
-      <router-link :to="{path: '/search', query: {id: 108}}">
+      <router-link :to="{path: '/search', query: {type: '本周晚餐', id: 108}}">
         <span class="search-all">查看全部</span>
       </router-link>
       <div class="img-wraper-content">
@@ -70,71 +66,75 @@
     </div>
     <div class="img-one no-meat-no-happy">
       <h2 class="title">无肉也欢</h2>
+      <router-link :to="{path: '/detail', query: {id: 407}}">
       <div class="img-wraper">
-        <img :src="require('assets/images/index/16_01_101_Final-medium-landscape-200.jpg')" alt="">
+        <img :src="require('assets/images/index/22_17_WildRiceSalad_final-large-landscape-200.jpg')" alt="">
       </div>
       <div class="description">
-        <p class="title">甜菜沙拉佐柑橘汁</p>
-        <!--<p class="sub-title">房故事草莓周!</p>-->
+        <p class="title">牛油果蔬菜沙拉</p>
       </div>
+      </router-link>
     </div>
     <div class="img-list new-article">
-      <h2 class="title">最新文章</h2>
-      <span class="search-all">查看全部</span>
+      <h2 class="title">食谱预览</h2>
       <div class="img-wraper-content">
         <div class="imgs-wraper">
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
+          <router-link :to="{path: '/search', query: {type: '低碳水化合物', id: 10}}">
+            <div class="img-s">
+              <div class="img-s-inner">
+                <img :src="require('assets/images/index/R622-photo-final-4x3-large-landscape-200-small-portrait-200.jpg')" alt="">
+                <div class="gradient"></div>
+                <div class="tile-text">低碳水化合物</div>
+              </div>
             </div>
-          </div>
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
+          </router-link>
+          <router-link :to="{path: '/search', query: {type: '亚洲风味', name: '面'}}">
+            <div class="img-s">
+              <div class="img-s-inner">
+                <img :src="require('assets/images/index/Asian_6c5a466f-small-portrait-200.jpg')" alt="">
+                <div class="gradient"></div>
+                <div class="tile-text">亚洲风味</div>
+              </div>
             </div>
-          </div>
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
+          </router-link>
+          <router-link :to="{path: '/search', query: {type: '草莓', name: '草莓'}}">
+            <div class="img-s">
+              <div class="img-s-inner">
+                <img :src="require('assets/images/index/16_01_30_BiscuitrolleMitErdbeersahnefuellung_Final-medium-landscape-200-small-portrait-200.jpg')" alt="">
+                <div class="gradient"></div>
+                <div class="tile-text">草莓</div>
+              </div>
             </div>
-          </div>
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
+          </router-link>
+          <router-link :to="{path: '/search', query: {type: '工作日晚餐', id: 108}}">
+            <div class="img-s">
+              <div class="img-s-inner">
+                <img :src="require('assets/images/index/R622-photo-final-4x3-large-landscape-200-small-portrait-200.jpg')" alt="">
+                <div class="gradient"></div>
+                <div class="tile-text">工作日晚餐</div>
+              </div>
             </div>
-          </div>
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
+          </router-link>
+          <router-link :to="{path: '/search', query: {type: '酒精饮品', name: '酒'}}">
+            <div class="img-s">
+              <div class="img-s-inner">
+                <img :src="require('assets/images/index/32_07_Cosmopolitan_TitlePicture-medium-landscape-200-small-portrait-200.jpg')" alt="">
+                <div class="gradient"></div>
+                <div class="tile-text">酒精饮品</div>
+              </div>
             </div>
-          </div>
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
+          </router-link>
+          <router-link :to="{path: '/search', query: {type: '烘焙', name: '面包'}}">
+            <div class="img-s">
+              <div class="img-s-inner">
+                <img :src="require('assets/images/index/r340-picture-title-small-portrait-200.jpg')" alt="">
+                <div class="gradient"></div>
+                <div class="tile-text">烘焙</div>
+              </div>
             </div>
-          </div>
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
-            </div>
-          </div>
-          <div class="img-s">
-            <img :src="require('assets/images/index/A342-photo-final-4x3-small-portrait-200.jpg')" alt="">
-            <div class="title-wraper">
-              <p class="title">初学者教程：如何布置西式餐桌</p>
-            </div>
-          </div>
-          
+          </router-link>
         </div>
-      </div>
-      
+      </div> 
     </div>
   </div>
 </template>
@@ -216,6 +216,7 @@
       font-family: @theme-font-family;
     }
 
+
     .img-wraper {
       padding-top: 20 * 2px;
 
@@ -255,6 +256,7 @@
     margin-right: -20px;
     overflow: hidden;
 
+
     .title {
       font-size: 40px;
       color: @theme-font-color-deep-minus;
@@ -281,6 +283,9 @@
     .imgs-wraper {
       width: 10000%;
       border-radius: 5px;
+      overflow: hidden;
+      // padding-bottom: 30 * 2px;
+      
 
       .img-s {
         width: 165 * 2px;
@@ -289,6 +294,11 @@
         float: left;
         position: relative;
         box-sizing: border-box;
+
+        .img-s-inner {
+          position: relative;
+          width: 149 * 2px;
+        }
 
         img {
           width: 149 * 2px;
@@ -317,6 +327,25 @@
           font-family: @theme-font-family;
           width: 149 * 2px;
           height: 21 * 2px;
+        }
+
+        .gradient{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          bottom: 0;
+          background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.5) 100%);
+          border-radius: 20px;
+        }
+
+        .tile-text {
+          font-size: 20 * 2px;
+          color: #fff;
+          position: absolute;
+          bottom: 20 * 2px;
+          text-align: center;
+          width: 100%;
         }
       }
 
@@ -375,6 +404,10 @@
 
     }
 
+  }
+
+  .new-article .imgs-wraper {
+    padding-bottom: 50 * 2px;
   }
 
 }
