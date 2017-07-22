@@ -9,10 +9,14 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+let ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+let os = require('os');
+
 var rootPathResolve = utils.rootPathResolve
 
 var nodeModulePath = rootPathResolve('node_modules')
 var srcCommonPath = rootPathResolve('src/common')
+var srcConfigPath = rootPathResolve('src/config')
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -22,12 +26,17 @@ var baseEntries = baseWebpackConfig.entry
 var baseEntriesLen = Object.keys(baseEntries).length
 var SCHEME = config.srcConfig.SCHEME
 
-var getRadio = function (entries, base) {
-  var radio = entries / base 
-  return (radio + 2) / (radio + 3)
+var cmmonsChunkHandle = function (resource, count) {
+  // if (/\.js$/.test(resource) && (resource.indexOf('babel') > -1)) {
+  //   console.log(resource)
+  // }
+  return /\.js$/.test(resource) &&
+    (
+      resource.indexOf(nodeModulePath) === 0
+      // src/common下 的模块
+      || resource.indexOf(srcCommonPath) === 0
+    )
 }
-
-var radio = getRadio(baseEntriesLen, 10)
 
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -40,19 +49,35 @@ var webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/chunks/[name].[id].[chunkhash].js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   sourceMap: true
+    // }),
+    // 开启多线程进行丑化
+    new ParallelUglifyPlugin({
+      workerCount: os.cpus().length,
+      cacheDir: './webpack_cache/',
+      uglifyJS: {
+        compress: {
+          warnings: false,
+          drop_debugger: true,
+          drop_console: true
+        },
+        comments: false,
+        sourceMap: true,
+        mangle: true
+      }
     }),
+
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')
@@ -87,32 +112,17 @@ var webpackConfig = merge(baseWebpackConfig, {
 
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      names: ['vendor', 'common'],
       minChunks: function (module, count) {
         // any required modules inside node_modules are extracted to vendor
-        var resource = module.resource
-        
-        // console.log(resource, ', count: ', count, ', baseEntriesLen: ', baseEntriesLen)
-        return resource &&
-          /\.js$/.test(resource) &&
-          (
-            resource.indexOf(nodeModulePath) === 0
-            ||
-            // src/common下 的模块
-            // 1 每个页面都引用的 count === baseEntries
-            // 2 非每个页面都引用, 引用次数/entires总数, 要和预设比例饿接近
-            (
-              resource.indexOf(srcCommonPath) === 0 && 
-              (count === baseEntriesLen || utils.close(count / baseEntriesLen, radio))
-            )
-          )
+        return cmmonsChunkHandle(module.resource, count)
       }
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      chunks: ['common', 'vendor'],
+      chunks: ['vendor', 'common'],
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
@@ -121,7 +131,12 @@ var webpackConfig = merge(baseWebpackConfig, {
         to: path.resolve(config.build.assetsRoot, 'static'),
         ignore: ['.*']
       }
-    ])
+    ]),
+
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./dll/lib-manifest.json')
+    })
   ].concat(entry.htmlGenerator())
 })
 
