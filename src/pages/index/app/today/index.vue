@@ -12,7 +12,7 @@
         </div>
         <h1>你好，我是冰淇淋</h1>
         <div class="share-links">
-          <ul>
+          <ul class="">
             <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://kitchenstories.io/zh/shi-pu/jian-yi-hai-xian-fan" target="_blank"><img src="https://kitchenstories.io/images/icon_facebook.svg" alt="Facebook" ></a></li>
             <li><a href="https://twitter.com/intent/tweet?text=%E7%AE%80%E6%98%93%E6%B5%B7%E9%B2%9C%E9%A5%AD&amp;url=https://kitchenstories.io/zh/shi-pu/jian-yi-hai-xian-fan&amp;hashtags=kitchenstories" target="_blank"><img src="https://kitchenstories.io/images/icon_twitter.svg" alt="Twitter" ></a></li>
             <li><a href="https://pinterest.com/pin/create/button/?url=https://kitchenstories.io/zh/shi-pu/jian-yi-hai-xian-fan&amp;media=https://images.kitchenstories.de/recipeImages/R704-photo-final.jpg&amp;description=%E6%88%91%E8%BF%87%E5%8E%BB%E6%80%BB%E8%A7%89%E5%BE%97%EF%BC%8C%E5%9C%A8%E5%AE%B6%E5%81%9A%E6%B5%B7%E9%B2%9C%E9%A5%AD%E5%A4%AA%E9%9A%BE%E4%BA%86%EF%BC%8C%E4%BD%86%E6%98%AF%E6%9C%89%E4%BA%86%E8%BF%99%E9%81%93%E9%A3%9F%E8%B0%B1%EF%BC%8C%E5%B0%B1%E8%83%BD%E4%BF%9D%E8%AF%81%E4%B8%8D%E5%87%BA%E9%94%99%E4%BA%86%E3%80%82%E6%88%91%E5%BE%88%E5%96%9C%E6%AC%A2%E4%B8%BA%E6%9C%8B%E5%8F%8B%E4%BB%AC%E5%88%B6%E4%BD%9C%E8%BF%99%E6%AC%BE%E6%B5%B7%E9%B2%9C%E9%A5%AD%EF%BC%81" target="_blank"><img src="https://kitchenstories.io/images/icon_pinterest.svg" alt="Pinterest"></a></li>
@@ -286,19 +286,25 @@ export default {
       }
 
       .share-links {
+        position: relative;
         height: 22 * 2px;
-        margin-left: 72 * 2px;
-        margin-right: 72 * 2px;
+        // margin-left: 72 * 2px;
+        // margin-right: 72 * 2px;
         text-align: center;
 
         ul {
-          text-align: center;
+          // height: 22 * 2px;
+          // position: absolute;
+          // text-align: center;
+          // left: 50%;
+          // transform: translate(-50%, 0);
+          display: inline-block;
         }
 
         li {
           float: left;
-          padding-left: 14px;
-          padding-right: 14px;
+          padding-left: 10px;
+          padding-right: 10px;
 
           img {
             height: 40px;
