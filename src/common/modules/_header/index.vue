@@ -25,7 +25,7 @@
 </template>
 
 <script>
-
+import './style.less'
 import cMenu from 'components/menu'
 
 const app = {

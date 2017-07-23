@@ -81,7 +81,7 @@ const fn = (App, Options) => {
     components: { App },
     render (h) {
       return <div>
-        <app></app>
+        <app class="app" ref="app" id="app"></app>
       </div>
     }
   })
